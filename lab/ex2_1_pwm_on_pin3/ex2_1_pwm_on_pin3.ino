@@ -22,6 +22,6 @@ void loop() {
         // a yellow LED flickers, probably because we 
         // step over the LED's voltage threshold (just slighly)
         // oscilloscope shows steady line after the capacitor
-        //delay(10000);
+        delay(2000);
     }
 }
