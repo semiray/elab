@@ -16,14 +16,59 @@ void setup() {
 
 
 void loop() {
-
-  // steady ramp up of voltage
-  for (int i=0; i<4095; i=i+100) {
-    dacWrite(i);
-//    Serial.println(i);
-    delay(100);
-  }
+  measureMaxFreq(10000);
+ 
 }
+
+void measureMaxFreq(int cycle) {
+  float start = millis();
+  int i = 0;
+  while (i < cycle) {
+    dacWrite(0);
+    dacWrite(4000);
+    i++;
+  }
+
+  float elapsed = millis() - start;
+  Serial.print("one cycle finished in (ms) ");
+  Serial.println( elapsed );
+  
+  Serial.print("Number of operations per millisecond` ");
+  Serial.println( (cycle*2) / elapsed );
+  // this will print:
+  // one cycle finished in (ms) 7157.00
+  // Number of operations per millisecond 2.79
+
+  // That would mean spead of 2.79kHZ.
+  // However, the oscilloscope shows ~700us per full cycle
+  // which is ~1.4kHz (at the output). Also, the input
+  // is the same speed (it seems). So, probably if Arduino
+  // could write faster, the DAC would output faster (???)
+}
+
+void rampUp(int d) {
+ // steady ramp up of voltage
+  // for some reason I can't get more than 4V
+  // Arduino is sending 5V, but DAC will output
+  // max of 4V
+  for (int i=0; i<4096; i=i+1) {
+    dacWrite(i);
+    delay(d);
+  }  
+}
+
+/**
+ * 2.6 wanted to have a function which receives a word
+ * but I prefer to pass just the values (and have static
+ * config). This is what I would do to handle 16bits
+ */
+void setDac( word w) {
+  byte conf = (w >> 12) & B1111; // take the first 4 bits (shift 12 right and bitmask)
+  int value = w & 0000111111111111; // remove the config (word is the same size as int)
+  //writeConfig(conf);
+  dacWrite(value);
+}
+
 
 /**
  * Write into the MSP4921. The max value is 4095
