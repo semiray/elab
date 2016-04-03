@@ -17,7 +17,7 @@ void setup() {
 
 void loop() {
   measureMaxFreq(10000);
- 
+  //rampUp(1);
 }
 
 void measureMaxFreq(int cycle) {
@@ -34,15 +34,14 @@ void measureMaxFreq(int cycle) {
   Serial.println( elapsed );
   
   Serial.print("Number of operations per millisecond` ");
-  Serial.println( (cycle*2) / elapsed );
+  Serial.println( (cycle / elapsed) * 2 );
   // this will print:
   // one cycle finished in (ms) 7157.00
   // Number of operations per millisecond 2.79
 
-  // That would mean spead of 2.79kHZ.
-  // However, the oscilloscope shows ~700us per full cycle
-  // which is ~1.4kHz (at the output). Also, the input
-  // is the same speed (it seems). So, probably if Arduino
+  // That is 1.39kHz ( ~350us per one dacWrite)
+  // The oscilloscope shows ~700us per full cycle
+  // the same speed (it seems). So, probably if Arduino
   // could write faster, the DAC would output faster (???)
 }
 

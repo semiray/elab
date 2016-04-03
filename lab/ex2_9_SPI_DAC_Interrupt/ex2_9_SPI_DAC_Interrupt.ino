@@ -37,10 +37,7 @@ void setDac( word w) {
   bitClear(high, 6); // unbuffered
   bitSet(high, 5); // 1x gain
   bitSet(high, 4); // 
-  //Serial.println(w);
-  //Serial.println(high, BIN);
-  //Serial.println(lowByte(w));
-  //Serial.println("---");
+
   SPI.transfer(high);
   SPI.transfer(lowByte(w));
   digitalWrite( pinCSn, HIGH); // close communication

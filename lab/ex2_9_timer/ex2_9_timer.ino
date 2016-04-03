@@ -7,6 +7,8 @@ int pinSCK = 13; // 3 on DAC - clock
 
 /**
 This will trigger signal every 250us (2kHz, very stable)
+The max we were able to reach was 18.6kHz (16us interrupt)
+Which is actually lower than SPI, is that right?
 **/
 
 volatile int dac = 0;
@@ -16,7 +18,7 @@ void timerFunc() {
 }
 
 void setup() {
-  Timer1.initialize( 250);    // timer interrupt every 250us
+  Timer1.initialize( 16 );    // timer interrupt every 250us
   Timer1.attachInterrupt( timerFunc);  // call every interrupt
 
   SPI.begin();
@@ -37,10 +39,6 @@ void setDac( word w) {
   bitClear(high, 6); // unbuffered
   bitSet(high, 5); // 1x gain
   bitSet(high, 4); // 
-  //Serial.println(w);
-  //Serial.println(high, BIN);
-  //Serial.println(lowByte(w));
-  //Serial.println("---");
   SPI.transfer(high);
   SPI.transfer(lowByte(w));
   digitalWrite( pinCSn, HIGH); // close communication
