@@ -5,6 +5,8 @@ int pinSCK = 13; // 3 on DAC - clock
 /**
  * experiment: 2 Vout = 1660
  *             4.02V = >3600 was highest output (because the current is drawn from Arduino?)
+ * Actually no: I used too small a resistor (200), when replaced
+ *   with 1k, the output goes up to 5V
  */
 
 void setup() {
@@ -16,8 +18,8 @@ void setup() {
 
 
 void loop() {
-  measureMaxFreq(10000);
-  //rampUp(1);
+  //measureMaxFreq(10000);
+  rampUp(1);
 }
 
 void measureMaxFreq(int cycle) {

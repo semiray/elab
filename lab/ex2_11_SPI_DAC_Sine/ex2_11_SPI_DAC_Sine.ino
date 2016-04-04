@@ -5,11 +5,6 @@ int pinCSn = 10; // 2 on DAC - to initiate communication
 int pinSDI = 11; // 4 on DAC - write data
 int pinSCK = 13; // 3 on DAC - clock
 
-/**
-When I use the full scale of the DAC 0-4095, the wave has top wider than the bottom.
-That's because setDac(4095) only goes up to 4V. I'll have to try with the external
-power source connected (in the lab). 
-**/
 
 float freq = 500.0;
 float amplitude = 1.0; // amplitude in V

@@ -6,9 +6,7 @@ int pinSDI = 11; // 4 on DAC - write data
 int pinSCK = 13; // 3 on DAC - clock
 
 /**
-When I use the full scale of the DAC 0-4095, the wave has top wider than the bottom.
-That's because setDac(4095) only goes up to 4V. I'll have to try with the external
-power source connected (in the lab). 
+The resistor has to be 1k or higher for the load to go to 5V 
 **/
 
 float dacRange = 1024.0; // use 2048 for full range 0-5V
