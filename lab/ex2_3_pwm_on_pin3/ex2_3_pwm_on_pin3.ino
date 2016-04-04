@@ -18,4 +18,4 @@ void loop() {
 //when d=3 frequency is 165Hz
 //when d =4  frequency is 125 and voltage is 2V
 
-// when d=150, the input (5v) drops to ~1.5V on output
+// when d=150, the input (5v) drops to 0.5-2V (~1.5V amplitude) on output
