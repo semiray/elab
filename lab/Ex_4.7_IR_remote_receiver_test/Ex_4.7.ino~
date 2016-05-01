@@ -59,7 +59,7 @@ void loop() {
          }
           break;          
     }
-    Serial.println(value);
-    irrecv.resume(); 
+    Serial.println(value); // you can comment this line
+    irrecv.resume(); // Receive the next value
   }
 }
