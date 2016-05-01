@@ -24,10 +24,10 @@ void setup()
   for(int i = 0; i < numButtons; i++) {
     pinMode(buttons[i], INPUT);
    Serial.begin(9600);
-  //pinMode(button, INPUT);
+  
   /* use pin 2 which has interrupt 0 on Arduino UNO */
   attachInterrupt(0, count, LOW);
-  //attachInterrupt(digitalPinToInterrupt(pins), count, LOW);
+ 
 
   }}
 
@@ -39,22 +39,19 @@ void loop()
   /* get the length of the string */
   int binLength = binNumber.length(); 
   if(presses <= 255) {  // if we have less or equal to 255 presses
-                // here is the scary code
+                
     for(int i = 0, x = 1; i < binLength; i++, x+=2) { 
       if(binNumber[i] == '0') state = LOW;
       if(binNumber[i] == '1') state = HIGH;
       digitalWrite(pins[i] + binLength - x, state);
-      //Serial.println(binNumber[i], BIN);
-      //Serial.println(pins[i] + binLength - x, state);
-      //Serial.println(presses, BIN);
       Serial.println(binNumber[i], BIN);
     } 
   } else {
-    // do something when we reach 255
+   
   }
 }
  
- /* function to count the presses */
+
 void count() { 
   // we debounce the button and increase the presses
   if(millis() - time > debounce)  presses++;
