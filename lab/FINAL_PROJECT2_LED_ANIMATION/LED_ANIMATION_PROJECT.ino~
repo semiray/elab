@@ -1,6 +1,6 @@
 /*This is the second final project, in this project i used different color leds
 and tried to the animation demonstration.
-*/
+
   
 int LedCount = 8;
 int pwmLEDPins[8] = {3, 4, 5, 6, 7, 8, 9, 10};
